@@ -19,18 +19,15 @@ const DistributeCash = ({navigation}: any) => {
       let filteredArray = todayLunchers.filter(
         item => item.withKhana === false,
       );
-      let costPerPerson = SalanCost / filteredArray.length;
+      let salanCostPerPerson = SalanCost / filteredArray.length;
+      let rotiCostPerPerson = RotiCost / todayLunchers.length;
 
       const updatedArray = todayLunchers.map(item => {
         return {
           ...item,
           lunchMoney: item.withKhana
-            ? Math.ceil(item.lunchMoney + RotiCost / todayLunchers.length)
-            : Math.ceil(
-                item.lunchMoney +
-                  RotiCost / todayLunchers.length +
-                  costPerPerson,
-              ),
+            ? Math.ceil(rotiCostPerPerson)
+            : Math.ceil(rotiCostPerPerson + salanCostPerPerson),
         };
       });
       setTodayLunchers(updatedArray);
@@ -47,19 +44,25 @@ const DistributeCash = ({navigation}: any) => {
         return Lunchersitem;
       });
       setLunchers(updatedLunchersPay);
-      Alert.alert('Alert Luuncher', 'New Luncher Added', [
-        {
-          text: 'Ok',
-          onPress: () =>
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 1,
-                routes: [{name: 'Home'}],
-              }),
-            ),
-          style: 'cancel',
-        },
-      ]);
+      Alert.alert(
+        'Alert Luncher',
+        `Full Lunch ${
+          salanCostPerPerson + rotiCostPerPerson
+        }, Single Lunch ${rotiCostPerPerson}`,
+        [
+          {
+            text: 'Ok',
+            onPress: () =>
+              navigation.dispatch(
+                CommonActions.reset({
+                  index: 1,
+                  routes: [{name: 'Home'}],
+                }),
+              ),
+            style: 'cancel',
+          },
+        ],
+      );
     }
   }
 
@@ -67,11 +70,13 @@ const DistributeCash = ({navigation}: any) => {
     <SafeAreaView>
       <TextInput
         onChangeText={text => setRotiCost(Number(text))}
+        placeholderTextColor={'#000000'}
         placeholder="Roti total cost"
         keyboardType="numeric"
       />
       <TextInput
         onChangeText={text => setSalanCost(Number(text))}
+        placeholderTextColor={'#000000'}
         placeholder="Salan total cost"
         keyboardType="numeric"
       />

@@ -1,13 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useFocusEffect, useIsFocused} from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import React, {useContext, useEffect} from 'react';
-import {
-  Button,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {LunchersContext} from '../../App';
 
 const Home = ({navigation}: any) => {
@@ -35,22 +29,22 @@ const Home = ({navigation}: any) => {
       <TouchableOpacity
         style={styles.bodyContainer}
         onPress={() => navigation.navigate('AddLunchers')}>
-        <Text>Add Lunchers</Text>
+        <Text style={{color: '#000000'}}>Add Lunchers</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.bodyContainer}
         onPress={() => navigation.navigate('DistributeCash')}>
-        <Text>Lunch Cost</Text>
+        <Text style={{color: '#000000'}}>Lunch Cost</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.bodyContainer}
         onPress={() => navigation.navigate('TodayLunchers')}>
-        <Text>Today Lunchers</Text>
+        <Text style={{color: '#000000'}}>Today Lunchers</Text>
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.bodyContainer}
         onPress={() => navigation.navigate('AllLunchers')}>
-        <Text>All Lunchers</Text>
+        <Text style={{color: '#000000'}}>All Lunchers</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );

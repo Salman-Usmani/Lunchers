@@ -1,5 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {CommonActions} from '@react-navigation/native';
 import React from 'react';
 import {useContext, useState} from 'react';
 import {
@@ -12,7 +10,7 @@ import {
 } from 'react-native';
 import {LunchersContext} from '../../App';
 
-const AddLunchers = ({navigation}: any) => {
+const AddLunchers = () => {
   const {setLunchers} = useContext(LunchersContext);
   const [name, setName] = useState('');
   function AddLuncher() {
@@ -23,16 +21,17 @@ const AddLunchers = ({navigation}: any) => {
         ...luncher,
         {name: name, lunchMoney: 0, withKhana: false},
       ]);
+      setName('');
       Alert.alert('Alert Luuncher', 'New Luncher Added', [
         {
           text: 'Ok',
-          onPress: () =>
-            navigation.dispatch(
-              CommonActions.reset({
-                index: 1,
-                routes: [{name: 'Home'}],
-              }),
-            ),
+          // onPress: () =>
+          //   navigation.dispatch(
+          //     CommonActions.reset({
+          //       index: 1,
+          //       routes: [{name: 'Home'}],
+          //     }),
+          //   ),
           style: 'cancel',
         },
       ]);
@@ -40,17 +39,12 @@ const AddLunchers = ({navigation}: any) => {
   }
 
   return (
-    <SafeAreaView style={{flex: 1, justifyContent: 'center'}}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          marginHorizontal: 5,
-          marginVertical: 50,
-        }}>
+    <SafeAreaView style={styles.mainContainer}>
+      <View style={styles.inputView}>
         <TextInput
-          placeholder="Lunchers Name"
+          placeholder="name"
+          placeholderTextColor={'#000000'}
+          value={name}
           onChangeText={text => setName(text)}
         />
       </View>
@@ -60,13 +54,16 @@ const AddLunchers = ({navigation}: any) => {
 };
 
 const styles = StyleSheet.create({
-  appContainer: {
+  mainContainer: {
     flex: 1,
+    justifyContent: 'center',
   },
-  sectionContainer: {
-    flex: 1,
+  inputView: {
+    flexDirection: 'row',
     justifyContent: 'space-between',
-    gap: 10,
+    alignItems: 'center',
+    marginHorizontal: 5,
+    marginVertical: 50,
   },
   sectionTitle: {
     fontSize: 24,

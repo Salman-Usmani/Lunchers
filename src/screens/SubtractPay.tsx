@@ -34,9 +34,10 @@ const SubtractPayment = ({route, navigation}: any) => {
 
   return (
     <SafeAreaView>
-      <Text>Subtract payment from {name}</Text>
+      <Text style={{color: '#000000'}}>Subtract payment from {name}</Text>
       <TextInput
         placeholder="Lunchers Name"
+        placeholderTextColor={'#000000'}
         onChangeText={text => setPay(Number(text))}
         keyboardType="numeric"
       />

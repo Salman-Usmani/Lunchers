@@ -1,4 +1,4 @@
-import {useContext, useState} from 'react';
+import {useContext} from 'react';
 import {
   FlatList,
   SafeAreaView,
@@ -12,10 +12,9 @@ import {TitemProps, Tlunchers} from '../types/types';
 import BouncyCheckbox from 'react-native-bouncy-checkbox';
 import React from 'react';
 
-const TodayLunchers = ({navigation}: any) => {
+const TodayLunchers = () => {
   const {todayLunchers, lunchers, setTodayLunchers} =
     useContext(LunchersContext);
-  const [selectedId, setSelectedId] = useState<string>();
 
   const handleSelect = (item: Tlunchers, withKhana: boolean) => {
     const isSelected = todayLunchers.find(
@@ -56,30 +55,28 @@ const TodayLunchers = ({navigation}: any) => {
     </View>
   );
   const renderItem = ({item}: {item: Tlunchers}) => {
-    const backgroundColor = item.name === selectedId ? '#6e3b6e' : '#f9c2ff';
-    const color = item.name === selectedId ? 'white' : 'black';
-
     return (
       <Item
         item={item}
         onPress={() => {
           handleSelect(item, false);
         }}
-        backgroundColor={backgroundColor}
-        textColor={color}
+        backgroundColor={
+          todayLunchers.some(element => element.name === item.name)
+            ? '#abcdef'
+            : '#fedcba'
+        }
+        textColor={'black'}
       />
     );
   };
   const renderTodayItem = ({item}: {item: Tlunchers}) => {
-    const backgroundColor = item.name === selectedId ? '#6e3b6e' : '#f9c2ff';
-    const color = item.name === selectedId ? 'white' : 'black';
-
     return (
       <Item
         item={item}
         onPress={() => {}}
-        backgroundColor={backgroundColor}
-        textColor={color}
+        backgroundColor={'#abcdef'}
+        textColor={'black'}
       />
     );
   };
@@ -92,16 +89,6 @@ const TodayLunchers = ({navigation}: any) => {
           flex: 1,
           borderBottomColor: '#abcdef',
           borderBottomWidth: 1,
-          paddingVertical: 5,
-        }}
-      />
-      <FlatList
-        data={todayLunchers}
-        renderItem={renderTodayItem}
-        style={{
-          flex: 1,
-          borderTopColor: '#fedcba',
-          borderTopWidth: 1,
           paddingVertical: 5,
         }}
       />
