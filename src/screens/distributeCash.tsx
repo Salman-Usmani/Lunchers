@@ -1,7 +1,14 @@
 import {CommonActions} from '@react-navigation/native';
 import React from 'react';
 import {useContext, useState} from 'react';
-import {Alert, Button, SafeAreaView, TextInput} from 'react-native';
+import {
+  Alert,
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  TextInput,
+  View,
+} from 'react-native';
 import {LunchersContext} from '../../App';
 import {Tlunchers} from '../types';
 
@@ -68,25 +75,61 @@ const DistributeCash = ({navigation}: any) => {
 
   return (
     <SafeAreaView>
-      <TextInput
-        onChangeText={text => setRotiCost(Number(text))}
-        placeholderTextColor={'#000000'}
-        placeholder="Roti total cost"
-        keyboardType="numeric"
-      />
-      <TextInput
-        onChangeText={text => setSalanCost(Number(text))}
-        placeholderTextColor={'#000000'}
-        placeholder="Salan total cost"
-        keyboardType="numeric"
-      />
+      <View style={styles.inputView}>
+        <TextInput
+          placeholder="Salan total cost"
+          placeholderTextColor={'#000000'}
+          keyboardType="numeric"
+          onChangeText={text => setSalanCost(Number(text))}
+          style={styles.inputStyle}
+        />
 
-      <Button
-        title="distribute Roti cost"
-        onPress={handleRotiCostDistribution}
-      />
+        <TextInput
+          placeholder="Roti total cost"
+          placeholderTextColor={'#000000'}
+          keyboardType="numeric"
+          onChangeText={text => setRotiCost(Number(text))}
+          style={styles.inputStyle}
+        />
+
+        <Button
+          title="distribute Roti cost"
+          onPress={handleRotiCostDistribution}
+        />
+      </View>
     </SafeAreaView>
   );
 };
 
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  inputView: {
+    // flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginVertical: 50,
+  },
+  inputStyle: {
+    borderWidth: 1,
+    width: '100%',
+    marginVertical: 10,
+    color: '#000000',
+  },
+  sectionDescription: {
+    flex: 1,
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: '400',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginHorizontal: 15,
+  },
+  highlight: {
+    fontWeight: '700',
+  },
+});
 export default DistributeCash;

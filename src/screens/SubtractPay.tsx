@@ -1,7 +1,14 @@
 import {CommonActions} from '@react-navigation/native';
 import React from 'react';
 import {useContext, useState} from 'react';
-import {Button, SafeAreaView, StyleSheet, Text, TextInput} from 'react-native';
+import {
+  Button,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import {Alert} from 'react-native';
 import {LunchersContext} from '../../App';
 
@@ -34,14 +41,17 @@ const SubtractPayment = ({route, navigation}: any) => {
 
   return (
     <SafeAreaView>
-      <Text style={{color: '#000000'}}>Subtract payment from {name}</Text>
-      <TextInput
-        placeholder="Lunchers Name"
-        placeholderTextColor={'#000000'}
-        onChangeText={text => setPay(Number(text))}
-        keyboardType="numeric"
-      />
-      <Button title="subtract Pay" onPress={handleSubtraction} />
+      <View style={styles.inputView}>
+        <Text style={{color: '#000000'}}>Subtract payment from {name}</Text>
+        <TextInput
+          placeholder="Lunchers Name"
+          placeholderTextColor={'#000000'}
+          onChangeText={text => setPay(Number(text))}
+          keyboardType="numeric"
+          style={styles.inputStyle}
+        />
+        <Button title="subtract Pay" onPress={handleSubtraction} />
+      </View>
     </SafeAreaView>
   );
 };
@@ -50,10 +60,23 @@ const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
   },
+  inputView: {
+    // flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: 20,
+    marginVertical: 50,
+  },
   sectionContainer: {
     flex: 1,
     justifyContent: 'space-between',
     gap: 10,
+  },
+  inputStyle: {
+    borderWidth: 1,
+    width: '100%',
+    marginVertical: 10,
+    color: '#000000',
   },
   sectionTitle: {
     fontSize: 24,

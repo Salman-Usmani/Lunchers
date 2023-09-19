@@ -47,7 +47,9 @@ const TodayLunchers = () => {
 
       <BouncyCheckbox
         style={{marginTop: 16}}
-        isChecked={item.withKhana ? true : false}
+        isChecked={todayLunchers.some(
+          element => element.withKhana === true && element.name === item.name,
+        )}
         text="is Khana?"
         disableBuiltInState
         onPress={() => handleSelect(item, true)}
@@ -70,16 +72,7 @@ const TodayLunchers = () => {
       />
     );
   };
-  const renderTodayItem = ({item}: {item: Tlunchers}) => {
-    return (
-      <Item
-        item={item}
-        onPress={() => {}}
-        backgroundColor={'#abcdef'}
-        textColor={'black'}
-      />
-    );
-  };
+
   return (
     <SafeAreaView style={styles.appContainer}>
       <FlatList
